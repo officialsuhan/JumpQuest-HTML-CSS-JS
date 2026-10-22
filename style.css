@@ -1,0 +1,166 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: Inter, Arial, sans-serif;
+  color: #172033;
+  background: #f3f5fb;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 32px 16px;
+  display: grid;
+  place-items: center;
+}
+
+.app {
+  width: min(100%, 560px);
+  padding: 32px;
+  background: #ffffff;
+  border: 1px solid #e5e9f2;
+  border-radius: 24px;
+  box-shadow: 0 18px 60px rgba(35, 48, 80, 0.10);
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #536dfe;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(28px, 6vw, 38px);
+}
+
+.subtitle {
+  margin: 8px 0 24px;
+  color: #788196;
+}
+
+.task-form {
+  display: flex;
+  gap: 10px;
+}
+
+.task-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 15px;
+  border: 1px solid #dce1ec;
+  border-radius: 12px;
+  font: inherit;
+  outline: none;
+}
+
+.task-form input:focus {
+  border-color: #536dfe;
+  box-shadow: 0 0 0 3px rgba(83, 109, 254, 0.13);
+}
+
+button {
+  border: 0;
+  border-radius: 12px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+button:hover {
+  filter: brightness(0.96);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.task-form button {
+  padding: 0 18px;
+  color: #ffffff;
+  background: #536dfe;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0 12px;
+  color: #788196;
+  font-size: 13px;
+}
+
+.text-button {
+  padding: 6px 0;
+  color: #536dfe;
+  background: transparent;
+  font-size: 13px;
+}
+
+.task-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid #e8ebf3;
+  border-radius: 13px;
+}
+
+.task-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #536dfe;
+  cursor: pointer;
+}
+
+.task-text {
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+
+.task-item.completed .task-text {
+  color: #9aa2b2;
+  text-decoration: line-through;
+}
+
+.delete-button {
+  padding: 7px 9px;
+  color: #d04444;
+  background: #fff0f0;
+  font-size: 12px;
+}
+
+.empty-state {
+  padding: 22px 8px 8px;
+  color: #929bad;
+  text-align: center;
+  font-size: 14px;
+}
+
+@media (max-width: 420px) {
+  .app {
+    padding: 22px 18px;
+  }
+
+  .task-form {
+    flex-direction: column;
+  }
+
+  .task-form button {
+    min-height: 46px;
+  }
+}

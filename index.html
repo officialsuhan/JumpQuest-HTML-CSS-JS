@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My To-Do List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header>
+      <p class="eyebrow">STAY ORGANIZED</p>
+      <h1>My To-Do List</h1>
+      <p class="subtitle">Small steps, big progress.</p>
+    </header>
+
+    <form id="task-form" class="task-form">
+      <input id="task-input" type="text" placeholder="What do you need to do?" autocomplete="off" maxlength="120" required>
+      <button type="submit">Add task</button>
+    </form>
+
+    <div class="toolbar">
+      <span id="task-count">0 tasks</span>
+      <button id="clear-completed" class="text-button" type="button">Clear completed</button>
+    </div>
+
+    <ul id="task-list" class="task-list" aria-live="polite"></ul>
+    <p id="empty-state" class="empty-state">You're all caught up. Add a task to get started!</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
