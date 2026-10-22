@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101827">
+  <title>JumpQuest — Pixel Platformer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="JumpQuest home">
+        <span class="brand-mark">JQ</span>
+        <span>JUMP<span class="brand-accent">QUEST</span><small>PIXEL ADVENTURE</small></span>
+      </a>
+      <div class="top-actions">
+        <div class="level-chip"><span class="status-dot"></span><span id="levelName">Level 1 · Green Hills</span></div>
+        <button class="icon-btn" id="soundBtn" aria-label="Toggle sound" title="Toggle sound">♫ <span id="soundLabel">Sound On</span></button>
+        <button class="icon-btn" id="pauseBtn" aria-label="Pause game">Ⅱ <span id="pauseLabel">Pause</span></button>
+      </div>
+    </header>
+
+    <section class="hero-row">
+      <div>
+        <p class="eyebrow">YOUR NEXT ADVENTURE STARTS HERE</p>
+        <h1>Run. Jump. <span>Discover.</span></h1>
+        <p class="subtitle">Collect the coins, dodge the slimes, and find the portal to the next world.</p>
+      </div>
+      <div class="hero-badge"><span class="badge-star">✦</span><span><b>ADVENTURE MODE</b><small>3 worlds · one quest</small></span></div>
+    </section>
+
+    <section class="game-layout">
+      <div class="game-column">
+        <div class="game-frame">
+          <div class="canvas-topline">
+            <div class="live-label"><span></span> LIVE GAME</div>
+            <div class="topline-right"><span id="worldLabel">WORLD 01</span><span class="divider-dot">•</span><span id="objectiveLabel">FIND THE PORTAL</span></div>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="gameCanvas" width="960" height="540" aria-label="JumpQuest game area"></canvas>
+            <div class="overlay" id="startOverlay">
+              <div class="overlay-card">
+                <div class="overlay-icon">▶</div>
+                <p class="eyebrow">READY, EXPLORER?</p>
+                <h2>Your quest awaits.</h2>
+                <p>Gather coins, leap over danger, and reach the glowing portal.</p>
+                <button class="primary-btn" id="startBtn">Start Adventure <span>→</span></button>
+                <small>WASD / Arrow keys to move · Space to jump</small>
+              </div>
+            </div>
+            <div class="overlay hidden" id="pauseOverlay">
+              <div class="overlay-card compact">
+                <div class="overlay-icon">Ⅱ</div>
+                <p class="eyebrow">TAKE A BREATHER</p>
+                <h2>Game paused</h2>
+                <p>Your progress is safe.</p>
+                <button class="primary-btn" id="resumeBtn">Resume Quest <span>→</span></button>
+              </div>
+            </div>
+            <div class="overlay hidden" id="messageOverlay">
+              <div class="overlay-card compact">
+                <div class="overlay-icon" id="messageIcon">✦</div>
+                <p class="eyebrow" id="messageEyebrow">QUEST UPDATE</p>
+                <h2 id="messageTitle">Level complete!</h2>
+                <p id="messageText">On to the next world.</p>
+                <button class="primary-btn" id="messageBtn">Continue <span>→</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="game-bottomline">
+            <span><kbd>←</kbd><kbd>→</kbd> Move <span class="bottom-sep">/</span> <kbd>Space</kbd> Jump</span>
+            <span class="checkpoint-state"><i></i><span id="checkpointLabel">Checkpoint: not reached</span></span>
+          </div>
+        </div>
+
+        <div class="mobile-controls" aria-label="Touch controls">
+          <div class="touch-movement">
+            <button class="touch-btn" id="leftBtn" aria-label="Move left">←</button>
+            <button class="touch-btn" id="rightBtn" aria-label="Move right">→</button>
+          </div>
+          <button class="touch-btn jump-btn" id="jumpBtn" aria-label="Jump">JUMP <span>↑</span></button>
+        </div>
+      </div>
+
+      <aside class="sidebar">
+        <div class="stats-card">
+          <div class="card-heading"><span>YOUR RUN</span><span class="live-pip">● LIVE</span></div>
+          <div class="score-row">
+            <div><small>TOTAL SCORE</small><strong id="scoreValue">00000</strong></div>
+            <div class="score-emblem">✦</div>
+          </div>
+          <div class="stat-grid">
+            <div class="mini-stat"><span class="stat-icon coin-icon">●</span><div><small>COINS</small><b id="coinValue">0 / 8</b></div></div>
+            <div class="mini-stat"><span class="stat-icon heart-icon">♥</span><div><small>HEARTS</small><b id="heartValue">♥ ♥ ♥</b></div></div>
+            <div class="mini-stat"><span class="stat-icon flag-icon">⚑</span><div><small>LEVEL</small><b id="levelValue">01 / 03</b></div></div>
+            <div class="mini-stat"><span class="stat-icon time-icon">◷</span><div><small>TIME</small><b id="timeValue">00:00</b></div></div>
+          </div>
+          <div class="progress-heading"><span>QUEST PROGRESS</span><b id="progressValue">0%</b></div>
+          <div class="progress-track"><div id="progressBar"></div></div>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-title"><span class="mission-icon">✧</span><div><small>CURRENT MISSION</small><b id="missionTitle">The First Steps</b></div></div>
+          <p id="missionText">Collect coins and follow the trail to the portal.</p>
+          <div class="mission-reward"><span>✦</span> <b>+250</b><small>PORTAL BONUS</small></div>
+        </div>
+
+        <div class="controls-card">
+          <div class="card-heading">HOW TO PLAY <span>?</span></div>
+          <div class="control-line"><span class="key-cluster"><kbd>A</kbd><kbd>D</kbd></span><span>Move left / right</span></div>
+          <div class="control-line"><span class="key-cluster"><kbd>W</kbd><kbd>↑</kbd><kbd>Space</kbd></span><span>Jump</span></div>
+          <div class="control-line"><span class="key-cluster"><kbd>P</kbd></span><span>Pause / resume</span></div>
+          <div class="tip-box"><span>✦</span><p><b>Explorer tip</b><br>Touching a checkpoint saves your place. Watch enemy patterns before you leap!</p></div>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="footer"><span>© JUMPQUEST ARCADE</span><span>BUILT FOR BRAVE EXPLORERS <b>✦</b></span><button id="restartBtn">↻ Restart run</button></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
